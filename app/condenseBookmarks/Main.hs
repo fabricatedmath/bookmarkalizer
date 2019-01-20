@@ -38,8 +38,11 @@ itemFromList = S.fromListWith f . map ((\(l,_,_) -> l) &&& id)
           | otherwise = i2
 
 process :: Text -> Item
-process t = (link,date,title)
-  where ((link:date:_),title) = (take 2 . T.words *** T.tail) . T.break (== '>') . strip $ t
+process t =
+  case stuff of
+    ((link:date:_),title) -> (link,date,title)
+    x -> error $ show x
+  where stuff = (take 2 . T.words *** T.tail) . T.break (== '>') . strip $ t
         strip = fromJust .  (T.stripSuffix "</A>" <=< T.stripPrefix "<DT><A HREF=")
 
 main :: IO ()
