@@ -28,13 +28,32 @@ library:
 executables:
   bookmarkalizer-exe:
     main:                Main.hs
-    source-dirs:         app
+    source-dirs:         app/condenseBookmarks
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
     - bookmarkalizer
+    - text
+    - directory
+    - unordered-containers
+    - hashable
+    - mtl
+
+  bookmarkalizer-json-exe:
+    main:                Main.hs
+    source-dirs:         app/jsonToBookmarks
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - bookmarkalizer
+    - bytestring
+    - text
+    - time
+    - aeson
 
 tests:
   bookmarkalizer-test:
